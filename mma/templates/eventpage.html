@@ -9,6 +9,9 @@
 	<h2>Fights on this card:</h2>
 	{% for fight in fights %}
 		<h3><a href="{{fight.Fighter1.profile_link}}">{{fight.Fighter1.name}}</a> vs <a href="{{fight.Fighter2.profile_link}}">{{fight.Fighter2.name}}</a><h3>
+		{% if user.is_authenticated %}
+			<h6><a href="/RemoveFight/{{fight.pk}}">Delete This Fight</a></h6>
+		{% endif %}
 	{% endfor %}
 
 {% endblock %}

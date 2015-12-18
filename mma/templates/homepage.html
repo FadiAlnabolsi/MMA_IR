@@ -6,7 +6,7 @@
 		<p><h3><a href="/Event/{{event.pk}}">{{event.name}}</a></h3></p>
 
 		{% if user.is_authenticated %}
-			<h2><a href="/RemoveEvent/{{event.pk}}">DELETE EVENT</a></h2>
+			<strong><h7><a href="/RemoveEvent/{{event.pk}}">DELETE EVENT</a></h7></strong>
 		{% endif %}
 
 		<p><img src="{{event.poster}}" alt="NO POSTER FOR THIS EVENT" height="500" width="450"></p>

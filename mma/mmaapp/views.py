@@ -78,7 +78,7 @@ def AddFight(request):
 def RemoveEvent(request, event_id):
 	if request.user.is_authenticated():
 		try:
-			Event = Event.objects.get(pk=event_id).delete()
+			e = Event.objects.get(pk=event_id).delete()
 			return redirect('/')
 		except Exception as e:
 			return redirect('/')
@@ -88,9 +88,10 @@ def RemoveEvent(request, event_id):
 def RemoveFight(request, fight_id):
 	if request.user.is_authenticated():
 		try:
-			Fight = Fights.objects.get(pk=event_id).delete()
+			f = Fights.objects.get(pk=fight_id).delete()
 			return redirect('/')
 		except Exception as e:
+			print(e)
 			return redirect('/')
 
 	return redirect('/')
