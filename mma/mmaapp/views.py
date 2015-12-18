@@ -1,17 +1,14 @@
 from django.shortcuts import render, redirect
 from django.utils import timezone
-from .models import Promoter, Event, Fighters, Fights
+from .models import Event, Fighters, Fights
+from mmaapp.forms import EventForm, FighterForm, FightForm
 
 # Create your views here.
 
 def Homepage(request):
-	if request.user.is_authenticated():
-		events = Event.objects.all().filter()
 		events = Event.objects.all().filter(event_day__gte = timezone.now())
-
+		print(Event.objects.all())
 		return render(request, 'homepage.html', {'events':events})
-	else:
-		return render(request, 'homepage.html')
 
 def EventPage(request, event_id):
 	try:
@@ -29,7 +26,45 @@ def FighterPage(request, fighter_id):
 		return redirect('/')
 
 def AddFighter(request):
-	return render(request, 'addfighter.html')
+	if request.user.is_authenticated():
 
-def CreateEvent(request):
-	return render(request, 'createevent.html')
+		if 'submit' in request.POST:
+			form = FighterForm(request.POST)
+			if form.is_valid():
+				form.save()
+				return redirect('/')
+
+			else:
+				return render(request, 'addfighter.html', {'form':form})
+
+		form = FighterForm()
+		return render(request, 'addfighter.html', {'form':form})
+
+	return redirect('/')
+
+def AddEvent(request):
+	if request.user.is_authenticated():
+
+		if 'submit' in request.POST:
+			form = EventForm(request.POST)
+			if form.is_valid():
+				form.save()
+				return redirect('/')
+
+			else:
+				return render(request, 'addevent.html', {'form':form})
+
+		form = EventForm()
+		return render(request, 'addfighter.html', {'form':form})
+
+	return redirect('/')
+
+def AddFight(request):
+	if request.user.is_authenticated():
+
+		if 'submit' in request.POST:
+			print('stfu')
+
+		return render(request, 'createfight.html')
+
+	return redirect('/')

@@ -4,18 +4,7 @@ from django.contrib.auth.models import User
 
 
 # Create your models here.
-class Promoter(models.Model):
-	user = models.OneToOneField(User, null=True)
-	promote = models.BooleanField(default=True)
-
-	def __str__(self):
-		return self.user.username
-
-	class Meta:
-		verbose_name_plural = "Promoters"
-
 class Event(models.Model):
-	promoter = models.ForeignKey(Promoter)
 	name = models.TextField()
 	location = models.TextField()
 	poster = models.TextField()

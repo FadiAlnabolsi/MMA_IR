@@ -5,7 +5,12 @@
 </head>
 <body>
 	<h1>Michigan Martial Arts!</h1>
-	
+	{% if user.is_authenticated %}
+		<a href="/AddFighter">Add Fighter</a>
+		<a href="/AddEvent">Add Event</a>
+		<a href="/AddFight">Add Fight to event</a>
+	{% endif %}
+
 	{% block content %}
 	{% endblock %}
 
