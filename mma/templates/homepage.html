@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 
 {% block content %}
-	{% if user.is_authenticated %}
-	<p><a href="accounts/logout/">Logout</a></p>
-	{% else %}
-	<p><a href="/accounts/login">Login</a></p>
-	{% endif %}
 
 	{% for event in events %}
 		<p><h3><a href="/Event/{{event.pk}}">{{event.name}}</a></h3></p>
+
+		{% if user.is_authenticated %}
+			<h2><a href="/RemoveEvent/{{event.pk}}">DELETE EVENT</a></h2>
+		{% endif %}
+
 		<p><img src="{{event.poster}}" alt="NO POSTER FOR THIS EVENT" height="500" width="450"></p>
 		<p>Date: {{event.event_day}}</p>
 		<p>Location: {{event.location}}</p>

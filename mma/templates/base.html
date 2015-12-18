@@ -9,6 +9,9 @@
 		<a href="/AddFighter">Add Fighter</a>
 		<a href="/AddEvent">Add Event</a>
 		<a href="/AddFight">Add Fight to event</a>
+		<p><a href="accounts/logout/">Logout</a></p>
+	{% else %}
+		<p><a href="/accounts/login">Login</a></p>
 	{% endif %}
 
 	{% block content %}

@@ -9,4 +9,6 @@ urlpatterns = [
     url(r'^AddFighter$', views.AddFighter),
     url(r'^AddEvent$', views.AddEvent),
     url(r'^AddFight$', views.AddFight),
+    url(r'^RemoveEvent/(?P<event_id>[0-9]+)$', views.RemoveEvent),
+    url(r'^RemoveFight/(?P<fight_id>[0-9]+)$', views.RemoveFight),
     ]
