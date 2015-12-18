@@ -7,6 +7,9 @@ class Promoter(models.Model):
 	user = models.OneToOneField(User, null=True)
 	promote = models.BooleanField(default=True)
 
+	def __str__(self):
+		return self.user.username
+
 class Event(models.Model):
 	promoter = models.OneToOneField(Promoter)
 	name = models.TextField()
@@ -15,10 +18,10 @@ class Event(models.Model):
 class Fighters(models.Model):
 	picture = models.TextField(null=True, blank=True)
 	name = models.TextField()
-	weight = models.TextField()
-	height = models.CharField(max_length=2)
-	reach = models.CharField(max_length=2)
-	age = models.CharField(max_length=2)
+	sherdog_profile = models.TextField()
+
+	def __str__(self):
+		return self.name
 
 class Fights(models.Model):
 	Event = models.OneToOneField(Event)
