@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 from django.contrib.auth.models import User
 
 
@@ -10,20 +11,40 @@ class Promoter(models.Model):
 	def __str__(self):
 		return self.user.username
 
-class Event(models.Model):
-	promoter = models.OneToOneField(Promoter)
-	name = models.TextField()
-	poster = models.TextField()
+	class Meta:
+		verbose_name_plural = "Promoters"
 
-class Fighters(models.Model):
-	picture = models.TextField(null=True, blank=True)
+class Event(models.Model):
+	promoter = models.ForeignKey(Promoter)
 	name = models.TextField()
-	sherdog_profile = models.TextField()
+	location = models.TextField()
+	poster = models.TextField()
+	event_day = models.DateTimeField(default=timezone.now())
 
 	def __str__(self):
 		return self.name
 
+	class Meta:
+		verbose_name_plural = "Events"
+
+class Fighters(models.Model):
+	picture = models.TextField(null=True, blank=True)
+	name = models.TextField()
+	profile_link = models.TextField()
+
+	def __str__(self):
+		return self.name
+
+	class Meta:
+		verbose_name_plural = "Fighters"
+
 class Fights(models.Model):
-	Event = models.OneToOneField(Event)
-	Fighter1 = models.OneToOneField(Fighters)
-	Fighter2 = models.OneToOneField(Fighters, related_name="opponent")
+	Event = models.ForeignKey(Event, unique=False)
+	Fighter1 = models.ForeignKey(Fighters)
+	Fighter2 = models.ForeignKey(Fighters, related_name="opponent")
+	
+	def __str__(self):
+		return self.Event.name + ":,  " + self.Fighter1.name + " vs " + self.Fighter2.name
+
+	class Meta:
+		verbose_name_plural = "Fights"

@@ -4,5 +4,8 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.Homepage),
-    url(r'^Event/(?P<event_id>[0-9]+$,)', views.EventPage)
+    url(r'^Event/(?P<event_id>[0-9]+)$', views.EventPage),
+    url(r'^Fighter/(?P<fighter_id>[0-9]+)$', views.FighterPage),
+    url(r'^AddFighter$', views.AddFighter),
+    url(r'^CreateEvent$', views.CreateEvent)
     ]

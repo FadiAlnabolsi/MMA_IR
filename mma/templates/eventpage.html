@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<p><h3><a href="/Event/{{event.pk}}">{{event.name}}</a></h3></p>
+	<p><img src="{{event.poster}}" alt="NO POSTER FOR THIS EVENT" height="500" width="450"></p>
+	<p>Date: {{event.event_day}}</p>
+	<p>Location: {{event.location}}</p>
+
+	<h2>Fights on this card:</h2>
+	{% for fight in fights %}
+		<h3><a href="{{fight.Fighter1.profile_link}}">{{fight.Fighter1.name}}</a> vs <a href="{{fight.Fighter2.profile_link}}">{{fight.Fighter2.name}}</a><h3>
+	{% endfor %}
+
+{% endblock %}
